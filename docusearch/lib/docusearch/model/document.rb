@@ -176,22 +176,38 @@ module Docusearch
         @client.index(index: @index_name, id: document.id, body: document.to_json)
       end
 
-      def search(query = "", limit = 20) # rubocop:disable Metrics/MethodLength
-        @client.search(
-          index: @index_name,
-          body: {
-            size: limit,
-            sort: [
-              "_score",
-              { created_at: { order: "desc" } }
-            ],
-            query: {
-              query_string: {
-                query:
-              }
-            }
+      def search(query = "", offset = 0, limit = 20) # rubocop:disable Metrics/MethodLength
+        sort = [
+          "_score",
+          { created_at: { order: "desc" } }
+        ]
+
+        query_body = {
+          query_string: {
+            query:
           }
-        )
+        }
+
+        if query&.length&.positive?
+          @client.search(
+            index: @index_name,
+            body: {
+              from: offset,
+              size: limit,
+              sort:,
+              query: query_body
+            }
+          )
+        else
+          @client.search(
+            index: @index_name,
+            body: {
+              from: offset,
+              size: limit,
+              sort:
+            }
+          )
+        end
       end
     end
   end
