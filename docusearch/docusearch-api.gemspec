@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "lib/docusearch/index"
+require_relative "lib/docusearch"
 
 Gem::Specification.new do |spec|
   spec.name = "docusearch"
@@ -20,8 +20,9 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
-  spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+
+  spec.bindir = "bin"
+  spec.executables = ["docusearch"]
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem

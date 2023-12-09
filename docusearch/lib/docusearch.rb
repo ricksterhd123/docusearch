@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "model/document"
+require_relative "docusearch/model"
 
 module Docusearch
   class Error < StandardError; end

@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "docusearch/model"
+require "bundler/gem_tasks"
+require "docusearch"
 require "elasticsearch"
 require "json"
 require "base64"
@@ -137,3 +138,5 @@ end
 #   response = client.index(index: "document2", body: random_order_document)
 #   puts response
 # end
+
+puts "Hello world!"
