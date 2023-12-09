@@ -112,6 +112,9 @@ GEM
       rack (>= 1.0)
     racc (1.7.3)
     rack (3.0.8)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rainbow (3.1.1)
     rake (13.1.0)
     regexp_parser (2.8.3)
@@ -147,12 +150,10 @@ GEM
     samovar (2.2.0)
       console (~> 1.0)
       mapping (~> 1.0)
-    sorbet (0.5.11148)
-      sorbet-static (= 0.5.11148)
-    sorbet-static (0.5.11148-x86_64-linux)
     timers (4.3.5)
     traces (0.11.1)
     unicode-display_width (2.5.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-linux
@@ -163,10 +164,10 @@ DEPENDENCIES
   faker (~> 3.2)
   falcon (~> 0.42.3)
   rack (~> 3.0)
+  rackup (~> 2.1)
   rake (~> 13.0)
   rspec (~> 3.0)
   rubocop (~> 1.21)
-  sorbet (~> 0.5.11148)
 
 BUNDLED WITH
    2.4.22
