@@ -1,0 +1,193 @@
+{
+	"AmazonEnvelope": {
+		"Header": {
+			"DocumentVersion": "1.01",
+			"MerchantIdentifier": "M_IDENTIFIER"
+		},
+		"MessageType": "OrderReport",
+		"Message": {
+			"MessageID": "1",
+			"OrderReport": {
+				"AmazonOrderID": "104-2391705-5555555",
+				"AmazonSessionID": "104-2391705-5555555",
+				"OrderDate": "2008-12-30T08:23:23-08:00",
+				"OrderPostedDate": "2008-12-30T08:23:23-08:00",
+				"BillingData": {
+					"BuyerEmailAddress": "testmerchant@gmail.com",
+					"BuyerName": "ABC Limited",
+					"BuyerPhoneNumber": "407-9999999"
+				},
+				"FulfillmentData": {
+					"FulfillmentMethod": "Ship",
+					"FulfillmentServiceLevel": "Standard",
+					"Address": {
+						"Name": "John Doe",
+						"AddressFieldOne": "John Doe",
+						"AddressFieldTwo": "4270 Cedar Ave",
+						"City": "SUMNER PARK",
+						"StateOrRegion": "FL",
+						"PostalCode": "32091",
+						"CountryCode": "US",
+						"PhoneNumber": "407-9999999"
+					}
+				},
+				"Item": {
+					"AmazonOrderItemCode": "55995643055555",
+					"SKU": "414070",
+					"Title": "Nike Women's Air Pegasus+ 25 ESC Running Shoe (Anthracite/ Grey/ Neutral\n                    Grey/ Mandarin) 9",
+					"Quantity": "1",
+					"ProductTaxCode": "A_GEN_TAX",
+					"ItemPrice": {
+						"Component": [
+							{
+								"Type": "Principal",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "63.99"
+								}
+							},
+							{
+								"Type": "Shipping",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "0.00"
+								}
+							},
+							{
+								"Type": "Tax",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "0.00"
+								}
+							},
+							{
+								"Type": "ShippingTax",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "0.00"
+								}
+							}
+						]
+					},
+					"ItemFees": {
+						"Fee": {
+							"Type": "Commission",
+							"Amount": {
+								"_currency": "USD",
+								"__text": "-9.60"
+							}
+						}
+					},
+					"ItemTaxData": {
+						"TaxJurisdictions": {
+							"TaxLocationCode": "100951788",
+							"City": "SUMNER",
+							"County": "BROWARD",
+							"State": "FL"
+						},
+						"TaxableAmounts": {
+							"District": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"City": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"County": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"State": {
+								"_currency": "USD",
+								"__text": "0.00"
+							}
+						},
+						"NonTaxableAmounts": {
+							"District": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"City": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"County": {
+								"_currency": "USD",
+								"__text": "63.99"
+							},
+							"State": {
+								"_currency": "USD",
+								"__text": "63.99"
+							}
+						},
+						"ZeroRatedAmounts": {
+							"District": {
+								"_currency": "USD",
+								"__text": "63.99"
+							},
+							"City": {
+								"_currency": "USD",
+								"__text": "63.99"
+							},
+							"County": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"State": {
+								"_currency": "USD",
+								"__text": "0.00"
+							}
+						},
+						"TaxCollectedAmounts": {
+							"District": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"City": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"County": {
+								"_currency": "USD",
+								"__text": "0.00"
+							},
+							"State": {
+								"_currency": "USD",
+								"__text": "0.00"
+							}
+						},
+						"TaxRates": {
+							"District": "0.0000",
+							"City": "0.0000",
+							"County": "0.0000",
+							"State": "0.0000"
+						}
+					},
+					"Promotion": {
+						"PromotionClaimCode": "_SITE_WIDE_",
+						"MerchantPromotionID": "FREESHIPPINGOVER25",
+						"Component": [
+							{
+								"Type": "Principal",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "0.00"
+								}
+							},
+							{
+								"Type": "Shipping",
+								"Amount": {
+									"_currency": "USD",
+									"__text": "0.00"
+								}
+							}
+						]
+					}
+				}
+			}
+		},
+		"_xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+		"_xsi:noNamespaceSchemaLocation": "amznenvelope.xsd"
+	}
+}

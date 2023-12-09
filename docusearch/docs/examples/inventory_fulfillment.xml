@@ -1,0 +1,18 @@
+<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="amznenvelope.xsd">
+    <Header>
+        <DocumentVersion>1.01</DocumentVersion>
+        <MerchantIdentifier>M_tokenhere_12345</MerchantIdentifier>
+    </Header>
+    <MessageType>Inventory</MessageType>
+    <Message>
+        <MessageID>1</MessageID>
+        <OperationType>Update</OperationType>
+        <Inventory>
+            <SKU>12345</SKU>
+            <FulfillmentCenterID>DEFAULT</FulfillmentCenterID>
+            <Quantity>1</Quantity>
+            <SwitchFulfillmentTo>MFN</SwitchFulfillmentTo>
+        </Inventory>
+    </Message>
+</AmazonEnvelope>
