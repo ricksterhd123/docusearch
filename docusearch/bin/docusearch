@@ -1,142 +1,14 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/gem_tasks"
 require "docusearch"
-require "elasticsearch"
-require "json"
-require "base64"
-require "faker"
-require "date"
-require "time"
-
-def random_order_item # rubocop:disable Metrics/MethodLength
-  orderitemid = Faker::Invoice.reference
-
-  {
-    "AmazonOrderItemCode": orderitemid,
-    "SKU": Faker::Barcode.ean,
-    "Title": Faker::Book.title,
-    "Quantity": Faker::Number.number.to_s,
-    "ProductTaxCode": "A_GEN_TAX",
-    "ItemPrice": {
-      "Component": [
-        {
-          "Type": "Principal",
-          "Amount": {
-            "_currency": "USD",
-            "__text": Faker::Number.positive.to_s
-          }
-        },
-        {
-          "Type": "Shipping",
-          "Amount": {
-            "_currency": "USD",
-            "__text": Faker::Number.positive.to_s
-          }
-        }
-      ]
-    }
-  }
-end
-
-def random_order # rubocop:disable Metrics/MethodLength
-  orderid = Faker::Invoice.reference
-  buyer_email = Faker::Internet.email
-  buyer_name = Faker::Name.name
-  buyer_number = Faker::PhoneNumber.phone_number
-  created_at = Faker::Time.between_dates(from: Date.today - 30, to: Date.today).iso8601
-
-  {
-    "AmazonOrderID": orderid,
-    "AmazonSessionID": orderid,
-    "OrderDate": created_at,
-    "OrderPostedDate": created_at,
-    "BillingData": {
-      "BuyerEmailAddress": buyer_email,
-      "BuyerName": buyer_name,
-      "BuyerPhoneNumber": buyer_number
-    },
-    "FulfillmentData": {
-      "FulfillmentMethod": "Ship",
-      "FulfillmentServiceLevel": "Standard",
-      "Address": {
-        "Name": "John Doe",
-        "AddressFieldOne": "John Doe",
-        "AddressFieldTwo": "4270 Cedar Ave",
-        "City": "SUMNER PARK",
-        "StateOrRegion": "FL",
-        "PostalCode": "32091",
-        "CountryCode": "US",
-        "PhoneNumber": "407-9999999"
-      }
-    },
-    "Item": (1..100).map { random_order_item }
-  }
-end
-
-def random_order_document # rubocop:disable Metrics/MethodLength
-  documentid = Faker::Internet.uuid
-  messagetype = "ORDERS"
-  sender = Faker::Company.name
-  receiver = Faker::Company.name
-  document_created_at = Faker::Time.between_dates(from: Date.today - 30, to: Date.today).iso8601
-
-  datafinal = random_order
-  orderid = datafinal["AmazonOrderID"]
-
-  {
-    documentid: documentid,
-    sourcename: sender,
-    destinationname: receiver,
-    source: sender,
-    destination: receiver,
-    messagereference: orderid,
-    documentreference: orderid,
-    messagetype: messagetype,
-    filename: "#{documentid}_#{messagetype}_#{orderid}_#{document_created_at}.json",
-    incoming: Faker::Internet.domain_name,
-    outgoing: Faker::Internet.domain_name,
-    datafinal: JSON.dump(datafinal),
-    created_at: document_created_at
-  }
-end
 
 ELASTICSEARCH_DOMAIN = "http://localhost:9200"
-DOCUMENT_INDEX_NAME = "document2"
-DOCUMENT_INDEX_MAPPING = {
-  properties: {
-    documentid: { type: "wildcard" },
-    sourcename: { type: "keyword" },
-    destinationname: { type: "keyword" },
-    source: { type: "keyword" },
-    destination: { type: "keyword" },
-    messagereference: { type: "keyword" },
-    documentreference: { type: "keyword" },
-    filenameoriginal: { type: "keyword" },
-    filename: { type: "keyword" },
-    incoming: { type: "keyword" },
-    outgoing: { type: "keyword" },
-    dataoriginal: { type: "text" },
-    datafinal: { type: "text" },
-    created_at: { type: "date" }
-  }
-}.freeze
+client = Docusearch::Model::Client.new(ELASTICSEARCH_DOMAIN)
 
-client = Elasticsearch::Client.new(url: ELASTICSEARCH_DOMAIN)
-
-unless client.indices.exists? index: DOCUMENT_INDEX_NAME
-  client.indices.create(
-    index: DOCUMENT_INDEX_NAME,
-    body: {
-      mappings: DOCUMENT_INDEX_MAPPING
-    }
-  )
+100_000.times do
+  document = Docusearch::Model::RandomDocument.new
+  puts document.to_json
+  documents = Docusearch::Model::Documents.new(client)
+  puts documents.add(document)
 end
-
-# 100_000.times do
-#   response = client.index(index: "document2", body: random_order_document)
-#   puts response
-# end
-
-puts "Hello world!"
