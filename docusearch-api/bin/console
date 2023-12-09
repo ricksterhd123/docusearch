@@ -3,9 +3,13 @@
 
 require "bundler/setup"
 require "docusearch/api"
+require "elasticsearch"
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
+puts "Hello"
 
-require "irb"
-IRB.start(__FILE__)
+client = Elasticsearch::Client.new(url: "http://localhost:9200")
+
+document = { name: "elasticsearch-ruby" }
+response = client.index(index: "my_index", body: document)
+
+puts response
