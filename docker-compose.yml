@@ -11,6 +11,15 @@ services:
     networks:
       - docusearch
 
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.15
+    volumes:
+      - docusearch:/usr/share/elasticsearch/data
+    ports:
+      - 5601:5601
+    networks:
+      - docusearch
+
 volumes:
   docusearch:
 
