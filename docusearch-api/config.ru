@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rack"
+require "rack/cors"
 require "docusearch"
 require "cgi"
 require "json"
