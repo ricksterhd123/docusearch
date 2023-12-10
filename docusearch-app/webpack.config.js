@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Docusearch',
+      title: 'docusearch',
       template: 'index.html'
     }),
   ],

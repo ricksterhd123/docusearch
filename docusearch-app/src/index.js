@@ -1,5 +1,5 @@
-const { useState } = require('react');
-const { createRoot } = require('react-dom/client');
+import { useState } from 'react';
+import { createRoot } from 'react-dom/client';
 
 function App() {
   const [count, setCount] = useState(0);
