@@ -23,9 +23,7 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
-    - name: Install deps
-      working-directory: ./docusearch-api
-      run: bundle install
+        working-directory: ./docusearch-api
     - name: Run the default task
       working-directory: ./docusearch-api
       run: bundle exec rake
