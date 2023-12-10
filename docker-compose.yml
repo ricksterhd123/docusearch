@@ -13,18 +13,20 @@ services:
       retries: 5
     restart: always
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.15
-    ports:
-      - 5601:5601
-    depends_on:
-      - elasticsearch
-    restart: always
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana:7.17.15
+  #   ports:
+  #     - 5601:5601
+  #   depends_on:
+  #     elasticsearch:
+  #       condition: service_healthy
+  #   restart: always
 
   docusearch-api:
     build: docusearch-api
     depends_on:
-      - elasticsearch
+      elasticsearch:
+        condition: service_healthy
     restart: always
 
   docusearch-app:
