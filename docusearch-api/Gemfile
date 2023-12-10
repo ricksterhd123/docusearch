@@ -20,3 +20,5 @@ gem "elasticsearch", "~> 7.17"
 gem "rack", "~> 3.0"
 
 gem "falcon", "~> 0.42.3"
+
+gem "rack-cors", "~> 2.0"

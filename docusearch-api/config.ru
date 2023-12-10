@@ -9,9 +9,16 @@ ELASTICSEARCH_DOMAIN = "http://elasticsearch:9200"
 client = Docusearch::Client.new(ELASTICSEARCH_DOMAIN)
 documents = Docusearch::Documents.new(client)
 
-app = Rack::Builder.new do
+app = Rack::Builder.new do # rubocop:disable Metrics/BlockLength
   use Rack::CommonLogger
   use Rack::Runtime
+
+  use Rack::Cors do
+    allow do
+      origins "*"
+      resource "/*", headers: :any, methods: :get
+    end
+  end
 
   map "/documents" do
     run do |env|
