@@ -30,10 +30,11 @@ services:
   docusearch-app:
     build: docusearch-app
     ports:
-      - "443:443"
-      - "80:80"
+      - 443:443
+      - 80:80
     depends_on:
       - docusearch-api
+    restart: always
 
 volumes:
   docusearch:
