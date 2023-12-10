@@ -26,7 +26,7 @@ app = Rack::Builder.new do
         # GET /documents/:id
         if id
           document = documents.get(id)
-          return [200, { "content-type" => "application/json" }, [JSON.dump(document)]] if documen
+          return [200, { "content-type" => "application/json" }, [JSON.dump(document)]] if document
 
           return [404, {}, []]
         end
