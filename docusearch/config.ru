@@ -1,29 +1,39 @@
 # frozen_string_literal: true
 
+require "rack"
 require "docusearch"
 require "cgi"
 require "json"
 
 ELASTICSEARCH_DOMAIN = "http://localhost:9200"
-client = Docusearch::Model::Client.new(ELASTICSEARCH_DOMAIN)
-documents = Docusearch::Model::Documents.new(client)
+client = Docusearch::Client.new(ELASTICSEARCH_DOMAIN)
+documents = Docusearch::Documents.new(client)
 
-run do |env|
-  request_method = env["REQUEST_METHOD"]
-  query_string = CGI.unescape(env["QUERY_STRING"] || "")
+app = Rack::Builder.new do
+  use Rack::CommonLogger
+  use Rack::Runtime
 
-  if request_method == "GET"
-    query_parameters = query_string.split("&").map do |x|
-      k, v = x.split("=")
-      [k, v]
-    end.to_h
+  map "/documents" do
+    run lambda { |env|
+          req = Rack::Request.new(env)
 
-    query_string = query_parameters["q"] || ""
-    offset = (query_parameters["offset"] || "0").to_i
-    limit = (query_parameters["limit"] || "20").to_i
+          if req.get?
+            _, id = req.path.split("/").slice(1..)
 
-    response = JSON.dump(documents.search(query_string, offset, limit))
+            if id
+              document = documents.get(id)
+              return [200, { "content-type" => "application/json" }, [JSON.dump(document)]] if document
 
-    [200, { "content-type" => "application/json" }, [response]]
+              return [404, {}, []]
+            end
+
+            query = req.params["query"] || ""
+            offset = (req.params["offset"] || "0").to_i
+            limit = (req.params["limit"] || "20").to_i
+            [200, { "content-type" => "application/json" }, [JSON.dump(documents.search(query, offset, limit))]]
+          end
+        }
   end
 end
+
+run app
