@@ -8,7 +8,7 @@ Need a simple solution for searching document metadata as well as substring sear
 ## Features
 - [x] simple frontend and backend REST API
 - [x] search documents
-- [] index documents (possible through docusearch library gem)
+- [ ] index documents (possible through docusearch library gem)
 
 ## Getting Started
 ### Requirements
