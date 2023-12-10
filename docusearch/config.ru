@@ -5,7 +5,7 @@ require "docusearch"
 require "cgi"
 require "json"
 
-ELASTICSEARCH_DOMAIN = "http://localhost:9200"
+ELASTICSEARCH_DOMAIN = "http://elasticsearch:9200"
 client = Docusearch::Client.new(ELASTICSEARCH_DOMAIN)
 documents = Docusearch::Documents.new(client)
 

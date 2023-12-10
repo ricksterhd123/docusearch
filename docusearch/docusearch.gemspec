@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "lib/docusearch"
-
 Gem::Specification.new do |spec|
   spec.name = "docusearch"
-  spec.version = Docusearch::VERSION
+  spec.version = "0.1.0"
   spec.authors = ["ricksterhd123"]
   spec.email = ["ricksterhd123@gmail.com"]
 

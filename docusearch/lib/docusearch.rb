@@ -9,7 +9,6 @@ require "time"
 
 module Docusearch
   class Error < StandardError; end
-  VERSION = "0.1.0"
 
   # Elasticsearch client
   class Client
