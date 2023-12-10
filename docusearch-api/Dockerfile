@@ -7,9 +7,10 @@ WORKDIR /docusearch
 COPY Gemfile Gemfile.lock docusearch.gemspec ./
 
 # install gems
-RUN bundle install --without development test
+RUN bundle install
 
 COPY . .
 
+# fill elasticsearch with dummy data (for demo purposes)
 # startup falcon webserver (entrypoint: config.ru)
-CMD bundle exec falcon host
+CMD bundle && bundle exec docusearch && bundle exec falcon host
