@@ -1,6 +1,6 @@
-# Docusearch
+# docusearch-api
 
-This is the backend API for the docusearch webapp, a read-only thin wrapper around elasticsearch (gem provides library methods for writing)
+This is the backend REST API for the docusearch-app, a read-only thin wrapper around elasticsearch (gem provides library methods for writing), built using ruby, rack and elasticsearch client.
 
 ## Getting Started
 
