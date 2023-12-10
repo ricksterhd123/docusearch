@@ -3,7 +3,7 @@
 A demo document search webapp using elasticsearch
 
 ## Rationale
-Need simple solution for searching document metadata as well as substring search on contents.
+Need a simple solution for searching document metadata as well as substring search on contents.
 
 ## Features
 - [x] simple frontend and backend REST API
@@ -17,3 +17,9 @@ Need simple solution for searching document metadata as well as substring search
 ### Setup
 - run `docker compose up`, this will build and deploy everything
 - go to [https://localhost](https://localhost)
+
+## docusearch-api
+- [README](/docusearch-api/README.md)
+
+## docusearch-app
+- [README](/docusearch-app/README.md)
