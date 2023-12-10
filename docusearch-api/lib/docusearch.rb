@@ -137,20 +137,19 @@ module Docusearch
       super
 
       id = Faker::Internet.uuid
-      messagetype = "ORDERS"
       sender = Faker::Company.name
       receiver = Faker::Company.name
       document_created_at = Faker::Time.between_dates(from: Date.today - 30, to: Date.today).iso8601
 
-      datafinal = _random_order
-      orderid = datafinal["AmazonOrderID"]
+      contents = _random_order
+      orderid = contents["AmazonOrderID"]
 
       @id = id
       @source = sender
       @destination = receiver
       @reference = orderid
-      @filename = "#{id}_#{messagetype}_#{orderid}_#{document_created_at}.json"
-      @contents = JSON.dump(datafinal)
+      @filename = "#{id}_ORDERS_#{orderid}_#{document_created_at}.json"
+      @contents = JSON.dump(contents)
       @created_at = document_created_at
       @updated_at = document_created_at
     end
