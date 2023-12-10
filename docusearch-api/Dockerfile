@@ -12,4 +12,4 @@ RUN bundle install --without development test
 COPY . .
 
 # startup falcon webserver (entrypoint: config.ru)
-CMD bundle exec falcon --hostname 0.0.0.0 --port 8080
+CMD bundle exec falcon host
