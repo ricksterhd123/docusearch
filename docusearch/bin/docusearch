@@ -6,6 +6,7 @@ require "docusearch"
 ELASTICSEARCH_DOMAIN = "http://localhost:9200"
 client = Docusearch::Model::Client.new(ELASTICSEARCH_DOMAIN)
 
+# Fill elasticsearch with random documents
 100_000.times do
   document = Docusearch::Model::RandomDocument.new
   puts document.to_json

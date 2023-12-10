@@ -14,25 +14,31 @@ app = Rack::Builder.new do
   use Rack::Runtime
 
   map "/documents" do
-    run lambda { |env|
-          req = Rack::Request.new(env)
+    run do |env|
+      req = Rack::Request.new(env)
+      # Handle the following requests
+      # GET /documents
+      # GET /documents/:id
+      if req.get?
+        _, id, *rest = req.path.split("/").slice(1..)
+        return [404, {}, []] if rest.length.positive?
 
-          if req.get?
-            _, id = req.path.split("/").slice(1..)
+        # GET /documents/:id
+        if id
+          document = documents.get(id)
+          return [200, { "content-type" => "application/json" }, [JSON.dump(document)]] if documen
 
-            if id
-              document = documents.get(id)
-              return [200, { "content-type" => "application/json" }, [JSON.dump(document)]] if document
-
-              return [404, {}, []]
-            end
-
-            query = req.params["query"] || ""
-            offset = (req.params["offset"] || "0").to_i
-            limit = (req.params["limit"] || "20").to_i
-            [200, { "content-type" => "application/json" }, [JSON.dump(documents.search(query, offset, limit))]]
-          end
-        }
+          return [404, {}, []]
+        end
+        # GET /documents
+        # extract query parameters out
+        # TODO: add proper validation
+        query = req.params["query"] || ""
+        offset = (req.params["offset"] || "0").to_i
+        limit = (req.params["limit"] || "20").to_i
+        [200, { "content-type" => "application/json" }, [JSON.dump(documents.search(query, offset, limit))]]
+      end
+    end
   end
 end
 
