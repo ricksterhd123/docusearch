@@ -23,11 +23,17 @@ services:
 
   docusearch-api:
     build: docusearch-api
-    ports:
-      - 8080:8080
     depends_on:
       - elasticsearch
     restart: always
-  
+
+  docusearch-app:
+    build: docusearch-app
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - docusearch-api
+
 volumes:
   docusearch:
