@@ -182,27 +182,16 @@ module Docusearch
       nil
     end
 
-    def search(query = "", offset = 0, limit = 20) # rubocop:disable Metrics/MethodLength
-      search_body = {
+    def search(query, offset = 0, limit = 20)
+      @client.search(
+        index: @index_name,
+        q: query,
         sort: [
           "_score",
           { created_at: { order: "desc" } }
         ],
         size: limit,
         from: offset
-      }
-
-      if query&.length&.positive?
-        search_body["query"] = {
-          query_string: {
-            query:
-          }
-        }
-      end
-
-      @client.search(
-        index: @index_name,
-        body: search_body
       )
     end
   end
