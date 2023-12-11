@@ -20,7 +20,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'docusearch',
-      template: 'index.html'
+      template: 'index.html',
+      favicon: 'favicon.ico'
     }),
   ],
   output: {
